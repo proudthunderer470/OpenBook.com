@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Open Book — Aryan Kumar &amp; Thyagu Prasath</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --neon:#00FFB2;--neon2:#FF2D78;--neon3:#6C63FF;
+    --bg:#080810;--bg2:#0E0E1A;--bg3:#13131F;
+    --card:#16162A;--border:#2A2A44;--text:#E8E8FF;--muted:#7070A0;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(8,8,16,0.95);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:52px}
+  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--neon)}
+  .nav-links{display:flex;gap:1.8rem;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.78rem;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s}
+  .nav-links a:hover{color:var(--neon)}
+
+  .hero{padding:3.5rem 2rem 2.5rem;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,178,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,178,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+  .hero-badge{display:inline-block;background:rgba(0,255,178,0.08);border:1px solid rgba(0,255,178,0.25);color:var(--neon);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;padding:5px 16px;border-radius:50px;margin-bottom:1.2rem}
+  .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,9vw,7rem);line-height:0.95;letter-spacing:2px;margin-bottom:1rem}
+  .hero h1 .g{color:var(--neon)}.hero h1 .w{color:var(--neon2)}
+  .hero p{color:var(--muted);font-size:1rem;max-width:520px;line-height:1.65;margin-bottom:1.5rem}
+  .hero-duo{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+  .duo-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1.25rem;min-width:180px;text-align:left}
+  .duo-card .role{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px}
+  .duo-card .name{font-family:'Space Mono',monospace;font-size:0.9rem;font-weight:700}
+  .duo-card.green .role,.duo-card.green .name{color:var(--neon)}
+  .duo-card.pink .role,.duo-card.pink .name{color:var(--neon2)}
+  .cta-row{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap}
+  .btn{padding:10px 24px;border-radius:8px;font-size:0.85rem;font-weight:500;cursor:pointer;text-decoration:none;letter-spacing:0.5px;transition:all 0.2s;border:none;display:inline-block}
+  .btn-neon{background:var(--neon);color:#080810}.btn-neon:hover{opacity:0.88;transform:translateY(-1px)}
+  .btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}.btn-outline:hover{border-color:var(--neon);color:var(--neon)}
+
+  section{padding:2.5rem 2rem}
+  .container{max-width:1100px;margin:0 auto}
+  .section-label{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--neon);margin-bottom:0.4rem;font-family:'Space Mono',monospace}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4.5vw,3rem);letter-spacing:1px;margin-bottom:0.3rem}
+  .section-sub{color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem;max-width:480px}
+  .divider{width:50px;height:2px;background:linear-gradient(90deg,var(--neon),transparent);margin-bottom:1.5rem}
+
+  .graphics-bg{background:var(--bg2)}
+  .design-categories{margin-bottom:1.2rem}
+  .design-category{display:inline-block;background:rgba(0,255,178,0.07);border:1px solid rgba(0,255,178,0.2);color:var(--neon);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:50px;margin:0 5px 8px 0}
+  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+  .gallery-item{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform 0.25s,border-color 0.25s;cursor:pointer}
+  .gallery-item:hover{transform:translateY(-4px);border-color:var(--neon)}
+  .gallery-placeholder{width:100%;height:170px;display:flex;align-items:center;justify-content:center}
+  .gallery-info{padding:0.8rem 1rem}
+  .gallery-tag{font-size:0.63rem;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:3px;font-family:'Space Mono',monospace}
+  .gallery-title{font-size:0.9rem;font-weight:500;color:var(--text)}
+  .gallery-desc{font-size:0.78rem;color:var(--muted);margin-top:3px;line-height:1.45}
+
+  .webdev-bg{background:var(--bg)}
+  .web-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+  .web-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform 0.25s,border-color 0.25s}
+  .web-card:hover{transform:translateY(-4px);border-color:var(--neon2)}
+  .web-preview{width:100%;height:150px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .web-preview .lines{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0.8rem;gap:4px}
+  .web-preview .line{height:5px;border-radius:3px;background:rgba(255,255,255,0.07)}
+  .web-preview .line.accent{background:rgba(255,45,120,0.4);width:60%}
+  .web-preview .line.short{width:40%}
+  .web-card-body{padding:1rem 1.2rem}
+  .web-tag{font-size:0.63rem;letter-spacing:2px;text-transform:uppercase;color:var(--neon2);margin-bottom:5px;font-family:'Space Mono',monospace}
+  .web-card h3{font-size:0.92rem;font-weight:500;margin-bottom:5px}
+  .web-card p{font-size:0.78rem;color:var(--muted);line-height:1.45;margin-bottom:0.8rem}
+  .web-card-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .tech-pills{display:flex;gap:5px;flex-wrap:wrap}
+  .tech-pill{font-size:0.6rem;padding:2px 7px;border-radius:50px;background:rgba(255,45,120,0.1);border:1px solid rgba(255,45,120,0.2);color:var(--neon2);letter-spacing:1px}
+  .visit-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;background:transparent;border:1px solid var(--neon2);color:var(--neon2);border-radius:7px;font-size:0.75rem;text-decoration:none;transition:all 0.2s;cursor:pointer}
+  .visit-btn:hover{background:var(--neon2);color:#080810}
+  .visit-btn svg{width:11px;height:11px}
+
+  .contact-bg{background:var(--bg);border-top:1px solid var(--border)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start}
+  .contact-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem}
+  .contact-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;margin-bottom:0.3rem}
+  .contact-card .role-tag{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.8rem;font-family:'Space Mono',monospace}
+  .contact-row{display:flex;align-items:center;gap:9px;margin-bottom:8px;font-size:0.82rem;color:var(--muted)}
+  .contact-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+  footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.25rem;text-align:center}
+  footer p{color:var(--muted);font-size:0.78rem}
+  footer span{color:var(--neon)}
+
+  @media(max-width:700px){.contact-grid{grid-template-columns:1fr}.nav-links{gap:1rem}}
+  .fade-up{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">OPEN BOOK</div>
+  <ul class="nav-links">
+    <li><a href="#graphics">Graphics</a></li>
+    <li><a href="#webdev">Web Dev</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-badge">Creative Studio · Est. 2024</div>
+  <h1><span class="g">DESIGN.</span><br><span class="w">BUILD.</span><br>LAUNCH.</h1>
+  <p>A creative duo turning ideas into bold visuals and powerful digital products — every pixel crafted with purpose.</p>
+  <div class="hero-duo">
+    <div class="duo-card green"><div class="role">Graphics Designer</div><div class="name">Aryan Kumar</div></div>
+    <div class="duo-card pink"><div class="role">Web Developer</div><div class="name">Thyagu Prasath</div></div>
+  </div>
+  <div class="cta-row">
+    <a href="#graphics" class="btn btn-neon">View Our Work</a>
+    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+  </div>
+</section>
+
+<!-- GRAPHICS DESIGN -->
+<section id="graphics" class="graphics-bg">
+  <div class="container fade-up">
+    <div class="section-label">Aryan Kumar</div>
+    <div class="section-title">Graphics Design</div>
+    <div class="section-sub">Visual identities that speak louder than words.</div>
+    <div class="divider"></div>
+    <div class="design-categories">
+      <span class="design-category">Logo Design</span>
+      <span class="design-category">Poster Design</span>
+      <span class="design-category">Visiting Cards</span>
+      <span class="design-category">Banners</span>
+      <span class="design-category">Brand Identity</span>
+    </div>
+    <div class="gallery-grid">
+
+      <!-- To add real images replace gallery-placeholder with:
+           <img src="your-image.jpg" style="width:100%;height:170px;object-fit:cover;display:block"> -->
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#0a0a1a,#1a1030)">
+          <svg width="70" height="70" viewBox="0 0 80 80"><circle cx="40" cy="40" r="30" fill="none" stroke="#00FFB2" stroke-width="2"/><polygon points="40,18 55,50 25,50" fill="none" stroke="#00FFB2" stroke-width="2"/><circle cx="40" cy="40" r="6" fill="#00FFB2" opacity="0.6"/></svg>
+        </div>
+        <div class="gallery-info"><div class="gallery-tag">Logo Design</div><div class="gallery-title">Apex Brand Identity</div><div class="gallery-desc">Minimal geometric logo for a tech startup — clean, scalable, memorable.</div></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#1a0a10,#2a0820)">
+          <svg width="70" height="70" viewBox="0 0 80 80"><rect x="10" y="10" width="60" height="60" rx="4" fill="none" stroke="#FF2D78" stroke-width="2"/><text x="40" y="35" text-anchor="middle" fill="#FF2D78" font-size="11" font-family="Arial">MUSIC</text><text x="40" y="50" text-anchor="middle" fill="#FF2D78" font-size="7" font-family="Arial">FESTIVAL 2025</text></svg>
+        </div>
+        <div class="gallery-info"><div class="gallery-tag">Poster Design</div><div class="gallery-title">Neon Beats Festival</div><div class="gallery-desc">High-energy event poster with bold typography and neon palette.</div></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#0a0f1a,#0a1a2a)">
+          <svg width="120" height="65" viewBox="0 0 120 65"><rect x="5" y="5" width="110" height="55" rx="6" fill="none" stroke="#6C63FF" stroke-width="1.5"/><circle cx="25" cy="32" r="13" fill="none" stroke="#6C63FF" stroke-width="1.5"/><text x="25" y="36" text-anchor="middle" fill="#6C63FF" font-size="8" font-family="Arial">AK</text><line x1="46" y1="20" x2="108" y2="20" stroke="#6C63FF" stroke-width="1" opacity="0.5"/><line x1="46" y1="30" x2="90" y2="30" stroke="#6C63FF" stroke-width="1" opacity="0.3"/><line x1="46" y1="40" x2="100" y2="40" stroke="#6C63FF" stroke-width="1" opacity="0.3"/></svg>
+        </div>
+        <div class="gallery-info"><div class="gallery-tag">Visiting Card</div><div class="gallery-title">Executive Business Card</div><div class="gallery-desc">Premium minimalist card with embossed logo treatment.</div></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#0f0a00,#1a1200)">
+          <svg width="150" height="55" viewBox="0 0 160 55"><rect x="2" y="2" width="156" height="51" rx="2" fill="none" stroke="#EF9F27" stroke-width="1.5"/><text x="80" y="24" text-anchor="middle" fill="#EF9F27" font-size="11" font-family="Arial" font-weight="bold">GRAND OPENING</text><text x="80" y="40" text-anchor="middle" fill="#EF9F27" font-size="7" font-family="Arial" opacity="0.7">SATURDAY · DOWNTOWN SQUARE · 6PM</text></svg>
+        </div>
+        <div class="gallery-info"><div class="gallery-tag">Banner</div><div class="gallery-title">Event Launch Banner</div><div class="gallery-desc">Wide-format promotional banner — print-ready at 300 DPI.</div></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#001a10,#001a18)">
+          <svg width="70" height="70" viewBox="0 0 90 90"><rect x="10" y="10" width="70" height="70" rx="14" fill="rgba(0,255,178,0.08)" stroke="#00FFB2" stroke-width="1.5"/><text x="45" y="40" text-anchor="middle" fill="#00FFB2" font-size="16" font-family="Arial" font-weight="bold">ZN</text><line x1="25" y1="50" x2="65" y2="50" stroke="#00FFB2" stroke-width="1" opacity="0.4"/><text x="45" y="62" text-anchor="middle" fill="#00FFB2" font-size="6.5" font-family="Arial" opacity="0.7">ZENITH STUDIOS</text></svg>
+        </div>
+        <div class="gallery-info"><div class="gallery-tag">Brand Identity</div><div class="gallery-title">Zenith Studios Full Pack</div><div class="gallery-desc">Complete brand kit — logo, palette, type system, stationery.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WEB DEVELOPMENT -->
+<section id="webdev" class="webdev-bg">
+  <div class="container fade-up">
+    <div class="section-label">Thyagu Prasath</div>
+    <div class="section-title">Web Development</div>
+    <div class="section-sub">Pixel-perfect interfaces backed by clean, scalable code.</div>
+    <div class="divider" style="background:linear-gradient(90deg,var(--neon2),transparent)"></div>
+    <div class="web-grid">
+
+      <!-- Project 1: Menu Based Website -->
+      <div class="web-card">
+        <div class="web-preview" style="background:linear-gradient(135deg,#0a1a0a,#0e0e1a)">
+          <div class="lines">
+            <div class="line" style="width:80%;background:rgba(0,255,178,0.25)"></div>
+            <div class="line" style="width:55%"></div>
+            <div class="line" style="width:70%;background:rgba(0,255,178,0.15)"></div>
+            <div class="line short"></div>
+          </div>
+          <span style="position:relative;z-index:1;font-size:1.8rem">🍽️</span>
+        </div>
+        <div class="web-card-body">
+          <div class="web-tag">Menu Website</div>
+          <h3>Menu Based Website</h3>
+          <p>A clean, interactive menu-based website — structured navigation with smooth browsing experience.</p>
+          <div class="web-card-footer">
+            <div class="tech-pills"><span class="tech-pill">HTML</span><span class="tech-pill">CSS</span><span class="tech-pill">JavaScript</span></div>
+            <a href="https://proudthunderer470.github.io/Menu-Based.com/" target="_blank" class="visit-btn">
+              Visit <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 11L11 1M11 1H5M11 1v6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: E-Commerce — UPDATE href to correct URL when confirmed -->
+      <div class="web-card">
+        <div class="web-preview" style="background:linear-gradient(135deg,#1a0820,#0e0e1a)">
+          <div class="lines">
+            <div class="line" style="width:85%"></div>
+            <div class="line accent"></div>
+            <div class="line" style="width:90%"></div>
+            <div class="line short"></div>
+          </div>
+          <span style="position:relative;z-index:1;font-size:1.8rem">🛒</span>
+        </div>
+        <div class="web-card-body">
+          <div class="web-tag">E-Commerce</div>
+          <h3>E-Commerce Store</h3>
+          <p>Full-featured online store with product listings, cart, and seamless payment integration.</p>
+          <div class="web-card-footer">
+            <div class="tech-pills"><span class="tech-pill">React</span><span class="tech-pill">Node.js</span><span class="tech-pill">Payments</span></div>
+            <a href="https://proudthunderer470.github.io/Ecommerce-based.com/" target="_blank" class="visit-btn">
+              Visit <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 11L11 1M11 1H5M11 1v6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: Coming Soon -->
+      <div class="web-card" style="border-style:dashed;opacity:0.5">
+        <div class="web-preview" style="background:var(--bg3)">
+          <div style="text-align:center;color:var(--muted)">
+            <div style="font-size:1.8rem;margin-bottom:6px">+</div>
+            <div style="font-size:0.75rem;letter-spacing:1px">Coming Soon</div>
+          </div>
+        </div>
+        <div class="web-card-body">
+          <div class="web-tag">Next Project</div>
+          <h3>Your Next Project</h3>
+          <p>Something exciting is in the works. Stay tuned.</p>
+          <div class="web-card-footer"><div class="tech-pills"><span class="tech-pill">TBD</span></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-bg">
+  <div class="container fade-up">
+    <div class="section-label">Let's Work Together</div>
+    <div class="section-title">Get In Touch</div>
+    <div class="section-sub">Have a project in mind? We'd love to hear about it.</div>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-card" style="border-color:rgba(0,255,178,0.3)">
+        <div class="role-tag" style="color:var(--neon)">Graphics Designer</div>
+        <h3 style="color:var(--neon)">Aryan Kumar</h3>
+        <div class="contact-row"><div class="contact-dot" style="background:var(--neon)"></div>notaryan7744@gmail.com</div>
+        <div class="contact-row"><div class="contact-dot" style="background:var(--neon)"></div>+91 63628 08915</div>
+        <div class="contact-row"><div class="contact-dot" style="background:var(--neon)"></div>@ary4n.designs · Instagram</div>
+        <div style="margin-top:0.75rem;font-size:0.75rem;color:var(--muted)">Logos · Posters · Business Cards · Banners · Brand Identity</div>
+      </div>
+      <div class="contact-card" style="border-color:rgba(255,45,120,0.3)">
+        <div class="role-tag" style="color:var(--neon2)">Web Developer</div>
+        <h3 style="color:var(--neon2)">Thyagu Prasath</h3>
+        <div class="contact-row"><div class="contact-dot" style="background:var(--neon2)"></div>thyaguprasath470@gmail.com</div>
+        <div class="contact-row"><div class="contact-dot" style="background:var(--neon2)"></div>+91 95131 42870</div>
+        <div class="contact-row"><div class="contact-dot" style="background:var(--neon2)"></div>@Thyagu Prasath · LinkedIn</div>
+        <div style="margin-top:0.75rem;font-size:0.75rem;color:var(--muted)">Web Apps · Dashboards · E-Commerce · SaaS Platforms</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Open Book</span> · Aryan Kumar &amp; Thyagu Prasath · Built with precision.</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
